@@ -42,7 +42,6 @@ Provide a repeatable template for launching future SaaS businesses.
 
 📸 Demo Preview
 
-(You can add screenshots or a short demo GIF once ready)
 
 “Learn anything, anytime, through conversation — your AI tutor is always ready.”
 
@@ -64,5 +63,5 @@ Perfect for Frontend / Full Stack Developer roles and AI SaaS product portfolios
 
 Md Arbazz Siddique
 Frontend & Full Stack Developer | Passionate about building modern AI-powered web apps.
-🔗 [LinkedIn Profile]
-🔗 [Portfolio Website] (optional if you have one)
+🔗 https://www.linkedin.com/in/arbaz-siddique-b99529244/
+🔗 https://3-d-portfolio-rouge-nu.vercel.app/
