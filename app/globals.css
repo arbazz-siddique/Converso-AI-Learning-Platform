@@ -204,12 +204,9 @@ body {
     @apply border-2 border-black rounded-lg flex flex-col gap-2 items-center py-8 max-sm:py-2 cursor-pointer w-full;
   }
 
-  .transcript {
-    @apply relative flex flex-col gap-4 w-full items-center pt-10 flex-grow overflow-hidden;
-  }
-  .transcript-message {
-    @apply overflow-y-auto w-full flex flex-col gap-4 max-sm:gap-2 pr-2 h-full text-2xl;
-  }
+.transcript { @apply relative flex flex-col gap-4 w-full items-center pt-4; height: calc(70vh - 220px); }
+.transcript-message { @apply overflow-y-auto w-full flex flex-col gap-4 pr-2 text-2xl; height: 100%; }
+
   .transcript-fade {
     @apply pointer-events-none absolute bottom-0 left-0 right-0 h-40 max-sm:h-20 bg-gradient-to-t from-background via-background/90 to-transparent z-10;
   }
