@@ -111,3 +111,76 @@ export const newCompanionPermissions = async()=>{
         return true
     }
 }
+
+export const addBookmark = async (companionId: string) => {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Not authenticated");
+
+  const supabase = createSupabaseClient();
+
+  const { data: existing } = await supabase
+    .from("bookmarks")
+    .select("id")
+    .eq("user_id", userId)
+    .eq("companion_id", companionId)
+    .maybeSingle();
+
+  if (existing) {
+    
+    await supabase
+      .from("bookmarks")
+      .delete()
+      .eq("user_id", userId)
+      .eq("companion_id", companionId);
+    return { success: false }; 
+  }
+
+  
+  const { error } = await supabase.from("bookmarks").insert({
+    user_id: userId,
+    companion_id: companionId,
+  });
+
+  if (error) throw new Error(error.message);
+  return { success: true }; 
+};
+
+export const removeBookmark = async (companionId: string) => {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Not authenticated");
+
+  const supabase = createSupabaseClient();
+  const { error } = await supabase
+    .from("bookmarks")
+    .delete()
+    .eq("user_id", userId)
+    .eq("companion_id", companionId);
+
+  if (error) throw new Error(error.message);
+  return { success: true };
+};
+
+export const getUserBookmarks = async (userId: string) => {
+  const supabase = createSupabaseClient();
+  const { data, error } = await supabase
+    .from("bookmarks")
+    .select(`companions:companion_id (*)`)
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false });
+
+  if (error) throw new Error(error.message);
+  return data.map(({ companions }) => companions);
+};
+
+export const isBookmarked = async (userId: string, companionId: string) => {
+  const supabase = createSupabaseClient();
+  const { data, error } = await supabase
+    .from("bookmarks")
+    .select("id")
+    .eq("user_id", userId)
+    .eq("companion_id", companionId)
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+  return !!data;
+};
